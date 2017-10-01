@@ -1,20 +1,60 @@
 import React from 'react';
-import {Title} from './Title.jsx'
+import {Clock, Hello} from './Welcome.jsx';
+import {TodoPrompt} from './Todo.jsx';
 
 export class App extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			date: '09:00',
-			name: 'Umberto'
+			date: new Date(),
+			name: '',
+			showName: false
 		};
+		this.handleNameInputChange = this.handleNameInputChange.bind(this);
+		this.handleNameSubmit = this.handleNameSubmit.bind(this);
+	}
+
+	componentDidMount(){
+		setInterval(
+			() => {this.clockTicker()},
+			1000
+		);
+	}
+
+	componentWillUnmount(){
+		clearInterval();
+	}
+
+	clockTicker(){
+		this.setState({
+			date: new Date()
+		});
+	}
+
+	handleNameInputChange(name) {
+		this.setState({
+			name: name
+		});
+	}
+
+	handleNameSubmit(showName) {
+		this.setState({
+			showName: showName
+		});
 	}
 
 	render() {
 		return (
 			<div>
-				<Title date={this.state.date} name={this.state.name} />
+				<Clock date={this.state.date} />
+				<Hello
+					name={this.state.name}
+					showName={this.state.showName}
+					onNameInputChange={this.handleNameInputChange}
+					onNameSubmit={this.handleNameSubmit}
+				/>
+				<TodoPrompt />
 			</div>
 		);
 	}

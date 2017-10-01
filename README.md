@@ -1,3 +1,3 @@
 # react-test-app
 
-my first react app
+A work in progress, [Momentum](https://momentumdash.com/)-inspired React app.
