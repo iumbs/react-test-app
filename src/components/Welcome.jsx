@@ -1,42 +1,108 @@
 import React from 'react';
 
-export const Clock = (props) => {
-  let fullDateToString = props.date.toLocaleTimeString();
-  let dateToString = fullDateToString.substr(0,5);
-  return <h1>{fullDateToString}</h1>
-};
+export class Clock extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.toggleSeconds = this.toggleSeconds.bind(this);
+  }
+
+  toggleSeconds(e) {
+    const bool = this.props.seconds ? false : true;
+    this.props.onSecondsToggler(bool);
+  }
+
+  render() {
+    const fullDate = this.props.date.toLocaleTimeString();
+    const date = fullDate.substr(0, 5);
+    if (this.props.seconds) {
+      return (
+        <div>
+          <h1>{fullDate}</h1>
+          <button onClick={this.toggleSeconds}>Hide seconds</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h1>{date}</h1>
+          <button onClick={this.toggleSeconds}>Show seconds</button>
+        </div>
+      );
+    }
+  }
+
+}
 
 export class Hello extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleNameInputChange = this.handleNameInputChange.bind(this);
-    this.handleNameSubmit = this.handleNameSubmit.bind(this);
+    this.toggleNameSubmit = this.toggleNameSubmit.bind(this);
   }
 
   handleNameInputChange(e) {
-		this.props.onNameInputChange(e.target.value)
+    const name = e.target.value;
+    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+		this.props.onNameInputChange(capitalizedName);
 	}
 
-	handleNameSubmit(e) {
-    this.props.onNameSubmit(true)
+	toggleNameSubmit(e) {
+    if (this.props.name.value) {
+      const bool = this.props.name.show ? false : true;
+      this.props.onNameSubmit(bool);
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+    }
 	}
 
   render() {
-    if (!this.props.showName) {
+    if (!this.props.name.show && !this.props.name.value) {
       return (
-        <h2>Hello,
-          <form onSubmit={this.handleNameSubmit}>
-            <input type="text" value={this.props.name} onChange={this.handleNameInputChange} />
-            <input type="submit" value="⮐" />
+        <h2>{this.props.welcomeMessage},
+          <form onSubmit={this.toggleNameSubmit}>
+            <input
+              type="text"
+              placeholder="Your name..."
+              value={this.props.name.value}
+              onChange={this.handleNameInputChange}
+            />
           </form>
         </h2>
       );
+    } else if (!this.props.name.show && this.props.name.value) {
+        return (
+          <h2>{this.props.welcomeMessage},
+            <form onSubmit={this.toggleNameSubmit}>
+              <input
+                type="text"
+                placeholder="Your name..."
+                value={this.props.name.value}
+                onChange={this.handleNameInputChange}
+              />
+              <input
+                type="submit"
+                value="⮐"
+              />
+            </form>
+          </h2>
+        );
     } else {
       return (
-        <h2>Hello, {this.props.name}</h2>
+        <div>
+          <h2>
+            {this.props.welcomeMessage}, {this.props.name.value}.
+            <form onSubmit={this.toggleNameSubmit}>
+              <input
+                type="submit"
+                value="Reset name"
+              />
+            </form>
+          </h2>
+        </div>
       );
     }
   }
-
 }
