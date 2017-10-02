@@ -54,17 +54,17 @@ export class App extends React.Component {
 		const hour = this.state.date.getHours();
 		let dayTime;
 		switch (true) {
-			case (hour >= 6 && hour < 12):
-				dayTime = 'morning';
-				break;
-			case (hour >= 12 && hour < 18):
-				dayTime = 'afternoon';
-				break;
-			case (hour >= 18 && hour < 23):
-				dayTime = 'evening';
-				break;
-			default: dayTime = 'night'
-		};
+		case (hour >= 6 && hour < 12):
+			dayTime = 'morning';
+			break;
+		case (hour >= 12 && hour < 18):
+			dayTime = 'afternoon';
+			break;
+		case (hour >= 18 && hour < 23):
+			dayTime = 'evening';
+			break;
+		default: dayTime = 'night';
+		}
 		this.setState({
 			welcomeMessage: `Good ${dayTime}`
 		});
