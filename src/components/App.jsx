@@ -1,5 +1,6 @@
 import React from 'react';
-import {Clock, Hello} from './Welcome.jsx';
+import {Clock} from './Clock.jsx';
+import {Welcome} from './Welcome.jsx';
 import {TodoPrompt} from './Todo.jsx';
 
 export class App extends React.Component {
@@ -95,7 +96,7 @@ export class App extends React.Component {
 					seconds={this.state.seconds}
 					onSecondsToggler={this.handleSecondsToggler}
 				/>
-				<Hello
+				<Welcome
 					welcomeMessage={this.state.welcomeMessage}
 					name={this.state.name}
 					onNameInputChange={this.handleNameInputChange}
