@@ -1,5 +1,6 @@
 import React from 'react';
-import {Clock, Hello} from './Welcome.jsx';
+import {Clock} from './Clock.jsx';
+import {Welcome} from './Welcome.jsx';
 import {TodoPrompt} from './Todo.jsx';
 
 export class App extends React.Component {
@@ -8,49 +9,96 @@ export class App extends React.Component {
 		super(props);
 		this.state = {
 			date: new Date(),
-			name: '',
-			showName: false
+			seconds: true,
+			welcomeMessage: '',
+			name: {
+				value: '',
+				show: false
+			}
 		};
 		this.handleNameInputChange = this.handleNameInputChange.bind(this);
 		this.handleNameSubmit = this.handleNameSubmit.bind(this);
+		this.handleSecondsToggler = this.handleSecondsToggler.bind(this);
+	}
+
+	componentWillMount(){
+		this.handleWelcomeMessage();
 	}
 
 	componentDidMount(){
 		setInterval(
-			() => {this.clockTicker()},
+			() => {
+				this.clockTicker();
+				this.handleWelcomeMessage();
+			},
 			1000
 		);
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		clearInterval();
 	}
 
-	clockTicker(){
+	clockTicker() {
 		this.setState({
 			date: new Date()
 		});
 	}
 
-	handleNameInputChange(name) {
+	handleSecondsToggler(newSeconds) {
 		this.setState({
-			name: name
+			seconds: newSeconds
 		});
 	}
 
-	handleNameSubmit(showName) {
+	handleWelcomeMessage(){
+		const hour = this.state.date.getHours();
+		let dayTime;
+		switch (true) {
+		case (hour >= 6 && hour < 12):
+			dayTime = 'morning';
+			break;
+		case (hour >= 12 && hour < 18):
+			dayTime = 'afternoon';
+			break;
+		case (hour >= 18 && hour < 23):
+			dayTime = 'evening';
+			break;
+		default: dayTime = 'night';
+		}
 		this.setState({
-			showName: showName
+			welcomeMessage: `Good ${dayTime}`
+		});
+	}
+
+	handleNameInputChange(newValue) {
+		const nameObj = this.state.name;
+		nameObj.value = newValue;
+		this.setState({
+			name: nameObj
+		});
+	}
+
+	handleNameSubmit(newShow) {
+		const nameObj = this.state.name;
+		nameObj.show = newShow;
+		nameObj.value = newShow ? nameObj.value : '';
+		this.setState({
+			name: nameObj
 		});
 	}
 
 	render() {
 		return (
 			<div>
-				<Clock date={this.state.date} />
-				<Hello
+				<Clock
+					date={this.state.date}
+					seconds={this.state.seconds}
+					onSecondsToggler={this.handleSecondsToggler}
+				/>
+				<Welcome
+					welcomeMessage={this.state.welcomeMessage}
 					name={this.state.name}
-					showName={this.state.showName}
 					onNameInputChange={this.handleNameInputChange}
 					onNameSubmit={this.handleNameSubmit}
 				/>
