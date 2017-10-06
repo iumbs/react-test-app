@@ -3,14 +3,15 @@ import {Clock} from './Clock.jsx';
 import {Welcome} from './Welcome.jsx';
 import {TodoPrompt} from './Todo.jsx';
 
-// const bgPath = require('./assets/bg_1.jpg');
-const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+const bgNum = 2;
+const bgPath = '../../assets/bg_' + Math.floor(Math.random() * bgNum + 1) + '.jpg';
 const containerStyle = {
-	// backgroundImage: 'url(' + bgPath + ')',
-	backgroundColor: 'black',
-	backgroundSize: 'auto ' + windowHeight + 'px',
+	height: '100%',
+	backgroundImage: 'url(' + bgPath + ')',
+	backgroundSize: 'cover',
 	backgroundRepeat: 'no-repeat',
-	color: 'white'
+	color: 'white',
+	fontFamily: '\'Helvetica-Neue\', Helvetica, Arial, sans-serif'
 };
 
 export class App extends React.Component {
@@ -100,19 +101,21 @@ export class App extends React.Component {
 
 	render() {
 		return (
-			<div className="container" style={containerStyle}>
-				<Clock
-					date={this.state.date}
-					seconds={this.state.seconds}
-					onSecondsToggler={this.handleSecondsToggler}
-				/>
-				<Welcome
-					welcomeMessage={this.state.welcomeMessage}
-					name={this.state.name}
-					onNameInputChange={this.handleNameInputChange}
-					onNameSubmit={this.handleNameSubmit}
-				/>
-				<TodoPrompt />
+			<div className="container" id="bg" style={containerStyle}>
+				<div className="container" id="overlay" style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.1)'}}>
+					<Clock
+						date={this.state.date}
+						seconds={this.state.seconds}
+						onSecondsToggler={this.handleSecondsToggler}
+					/>
+					<Welcome
+						welcomeMessage={this.state.welcomeMessage}
+						name={this.state.name}
+						onNameInputChange={this.handleNameInputChange}
+						onNameSubmit={this.handleNameSubmit}
+					/>
+					<TodoPrompt />
+				</div>
 			</div>
 		);
 	}
