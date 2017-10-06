@@ -3,6 +3,16 @@ import {Clock} from './Clock.jsx';
 import {Welcome} from './Welcome.jsx';
 import {TodoPrompt} from './Todo.jsx';
 
+// const bgPath = require('./assets/bg_1.jpg');
+const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+const containerStyle = {
+	// backgroundImage: 'url(' + bgPath + ')',
+	backgroundColor: 'black',
+	backgroundSize: 'auto ' + windowHeight + 'px',
+	backgroundRepeat: 'no-repeat',
+	color: 'white'
+};
+
 export class App extends React.Component {
 
 	constructor(props) {
@@ -90,7 +100,7 @@ export class App extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container" style={containerStyle}>
 				<Clock
 					date={this.state.date}
 					seconds={this.state.seconds}
