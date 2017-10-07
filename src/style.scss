@@ -1,0 +1,17 @@
+html body #app {
+	height: 100%;
+	margin: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	color: white;
+}
+
+.container {
+	@extend html;
+	#bg {
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	#overlay {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+}

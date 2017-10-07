@@ -3,16 +3,9 @@ import {Clock} from './Clock.jsx';
 import {Welcome} from './Welcome.jsx';
 import {TodoPrompt} from './Todo.jsx';
 
-const bgNum = 2;
+const bgNum = 9;
 const bgPath = '../../assets/bg_' + Math.floor(Math.random() * bgNum + 1) + '.jpg';
-const containerStyle = {
-	height: '100%',
-	backgroundImage: 'url(' + bgPath + ')',
-	backgroundSize: 'cover',
-	backgroundRepeat: 'no-repeat',
-	color: 'white',
-	fontFamily: '\'Helvetica-Neue\', Helvetica, Arial, sans-serif'
-};
+const bgImage = {	backgroundImage: 'url(' + bgPath + ')' };
 
 export class App extends React.Component {
 
@@ -101,8 +94,8 @@ export class App extends React.Component {
 
 	render() {
 		return (
-			<div className="container" id="bg" style={containerStyle}>
-				<div className="container" id="overlay" style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.1)'}}>
+			<div className="container" id="bg" style={bgImage}>
+				<div className="container" id="overlay">
 					<Clock
 						date={this.state.date}
 						seconds={this.state.seconds}
