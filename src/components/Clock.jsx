@@ -1,5 +1,26 @@
 import React from 'react';
 
+const clockStyle = {
+	maxWidth: '700px',
+	margin: '0 auto 100px auto',
+	position: 'relative'
+};
+
+const h1Style = {
+	textAlign: 'center',
+	fontSize: '150px',
+	position: 'relative',
+	margin: '0',
+	padding: '35% 0 0 0'
+};
+
+const buttonStyle = {
+	fontSize: '38px',
+	position: 'absolute',
+	margin: '-3% 46%',
+	padding: '0'
+};
+
 export class Clock extends React.Component {
 
 	constructor(props) {
@@ -17,16 +38,20 @@ export class Clock extends React.Component {
 		const date = fullDate.substr(0, 5);
 		if (this.props.seconds) {
 			return (
-				<div>
-					<h1>{fullDate}</h1>
-					<button onClick={this.toggleSeconds}>Hide seconds</button>
+				<div className='content' id='clock' style={clockStyle}>
+					<h1 style={h1Style}>{fullDate}</h1>
+					<button onClick={this.toggleSeconds} style={buttonStyle}>
+						<i class="fa fa-toggle-on" aria-hidden="true"></i>
+					</button>
 				</div>
 			);
 		} else {
 			return (
-				<div>
-					<h1>{date}</h1>
-					<button onClick={this.toggleSeconds}>Show seconds</button>
+				<div className='content' id='clock' style={clockStyle}>
+					<h1 style={h1Style}>{date}</h1>
+					<button onClick={this.toggleSeconds} style={buttonStyle}>
+						<i class="fa fa-toggle-off" aria-hidden="true"></i>
+					</button>
 				</div>
 			);
 		}

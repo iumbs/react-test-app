@@ -3,14 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Momentum-inspired React Application</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
-		html, body, #app {
+		html, body, div.container {
 			height: 100%;
 			margin: 0;
+			position: relative;
+			color: rgba(255,255,255,0.9);
+			font-family: 'Helvetica-Neue', Helvetica, Arial, sans-serif;
+		}
+		button {
+			color: rgba(255,255,255,0.5);
+			background-color: transparent;
+			border-color: transparent;
+			cursor: pointer;
+		}
+		button:hover {
+			color: rgba(255, 255, 255, 0.9);
+		}
+		button:focus {
+			outline: none;
 		}
 	</style>
 </head>
 <body>
-	<div id="app"></div>
+	<div class="container" id="app"></div>
 </body>
 </html>
