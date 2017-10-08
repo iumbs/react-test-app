@@ -100,7 +100,7 @@ export class App extends React.Component {
 	render() {
 		return (
 			<div className="container" id="bg" style={bgStyle}>
-				<div className="container" id="overlay" style={{backgroundColor: 'rgba(0,0,0,0.1)'}}>
+				<div className="container" id="overlay" style={{backgroundColor: 'rgba(0,0,0,0.25)'}}>
 					<Clock
 						date={this.state.date}
 						seconds={this.state.seconds}
@@ -112,7 +112,7 @@ export class App extends React.Component {
 						onNameInputChange={this.handleNameInputChange}
 						onNameSubmit={this.handleNameSubmit}
 					/>
-					<TodoPrompt />
+					{/* <TodoPrompt /> */}
 				</div>
 			</div>
 		);

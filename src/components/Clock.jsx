@@ -11,13 +11,13 @@ const h1Style = {
 	fontSize: '150px',
 	position: 'relative',
 	margin: '0',
-	padding: '35% 0 0 0'
+	padding: '50% 0 0 0'
 };
 
 const buttonStyle = {
 	fontSize: '38px',
 	position: 'absolute',
-	margin: '-3% 46%',
+	margin: '-3% 47%',
 	padding: '0'
 };
 
@@ -28,7 +28,7 @@ export class Clock extends React.Component {
 		this.toggleSeconds = this.toggleSeconds.bind(this);
 	}
 
-	toggleSeconds(e) {
+	toggleSeconds() {
 		const bool = this.props.seconds ? false : true;
 		this.props.onSecondsToggler(bool);
 	}
@@ -41,7 +41,7 @@ export class Clock extends React.Component {
 				<div className='content' id='clock' style={clockStyle}>
 					<h1 style={h1Style}>{fullDate}</h1>
 					<button onClick={this.toggleSeconds} style={buttonStyle}>
-						<i class="fa fa-toggle-on" aria-hidden="true"></i>
+						<i className="fa fa-toggle-on" aria-hidden="true"></i>
 					</button>
 				</div>
 			);
@@ -50,7 +50,7 @@ export class Clock extends React.Component {
 				<div className='content' id='clock' style={clockStyle}>
 					<h1 style={h1Style}>{date}</h1>
 					<button onClick={this.toggleSeconds} style={buttonStyle}>
-						<i class="fa fa-toggle-off" aria-hidden="true"></i>
+						<i className="fa fa-toggle-off" aria-hidden="true"></i>
 					</button>
 				</div>
 			);
