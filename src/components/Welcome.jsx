@@ -31,11 +31,17 @@ const inputTextStyle = {
 };
 
 const submitStyle = {
+	display: 'inline',
+	float: 'right',
+	margin: 'auto',
+	fontSize: '14px'
+};
+
+const resetStyle = {
 	fontSize: '14px',
 	border: '2px solid',
 	borderRadius: '100px',
 	padding: '5px 20px',
-	margin: '-10px 0',
 };
 
 
@@ -71,7 +77,6 @@ export class Welcome extends React.Component {
 						<form onSubmit={this.toggleNameSubmit} style={formStyle}>
 							<input
 								type="text"
-								// placeholder="Your name..."
 								value={this.props.name.value}
 								onChange={this.handleNameInputChange}
 								style={inputTextStyle}
@@ -91,7 +96,6 @@ export class Welcome extends React.Component {
 							style={formStyle}>
 							<input
 								type="text"
-								placeholder="Your name..."
 								value={this.props.name.value}
 								onChange={this.handleNameInputChange}
 								style={inputTextStyle}
@@ -99,12 +103,7 @@ export class Welcome extends React.Component {
 							<input
 								type="submit"
 								value="⮐ to Submit"
-								style={{
-									display: 'inline',
-									float: 'right',
-									margin: 'auto',
-									fontSize: '14px'
-								}}
+								style={submitStyle}
 							/>
 						</form>
 					</h2>
@@ -118,8 +117,8 @@ export class Welcome extends React.Component {
 						<form onSubmit={this.toggleNameSubmit}>
 							<input
 								type="submit"
-								value="Reset name"
-								style={submitStyle}
+								value="Reset all"
+								style={resetStyle}
 							/>
 						</form>
 					</h2>

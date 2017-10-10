@@ -1,7 +1,7 @@
 import React from 'react';
 import {Clock} from './Clock.jsx';
 import {Welcome} from './Welcome.jsx';
-import {TodoPrompt} from './Todo.jsx';
+import {Todo} from './Todo.jsx';
 
 const bgNum = 9;
 const bgPath = '../../assets/bg_' + Math.floor(Math.random() * bgNum + 1) + '.jpg';
@@ -23,11 +23,19 @@ export class App extends React.Component {
 			name: {
 				value: '',
 				show: false
+			},
+			mainFocus: {
+				value: '',
+				show: false,
+				checked: false
 			}
 		};
+		this.handleSecondsToggler = this.handleSecondsToggler.bind(this);
 		this.handleNameInputChange = this.handleNameInputChange.bind(this);
 		this.handleNameSubmit = this.handleNameSubmit.bind(this);
-		this.handleSecondsToggler = this.handleSecondsToggler.bind(this);
+		this.handleMainFocusInputChange = this.handleMainFocusInputChange.bind(this);
+		this.handleMainFocusSubmit = this.handleMainFocusSubmit.bind(this);
+		this.handleMainFocusCheck = this.handleMainFocusCheck.bind(this);
 	}
 
 	componentWillMount(){
@@ -49,15 +57,11 @@ export class App extends React.Component {
 	}
 
 	clockTicker() {
-		this.setState({
-			date: new Date()
-		});
+		this.setState({date: new Date()});
 	}
 
 	handleSecondsToggler(newSeconds) {
-		this.setState({
-			seconds: newSeconds
-		});
+		this.setState({seconds: newSeconds});
 	}
 
 	handleWelcomeMessage(){
@@ -75,26 +79,39 @@ export class App extends React.Component {
 			break;
 		default: dayTime = 'night';
 		}
-		this.setState({
-			welcomeMessage: `Good ${dayTime}`
-		});
+		this.setState({welcomeMessage: `Good ${dayTime}`});
 	}
 
 	handleNameInputChange(newValue) {
 		const nameObj = this.state.name;
 		nameObj.value = newValue;
-		this.setState({
-			name: nameObj
-		});
+		this.setState({name: nameObj});
 	}
 
 	handleNameSubmit(newShow) {
 		const nameObj = this.state.name;
 		nameObj.show = newShow;
 		nameObj.value = newShow ? nameObj.value : '';
-		this.setState({
-			name: nameObj
-		});
+		this.setState({name: nameObj});
+	}
+
+	handleMainFocusInputChange(newValue) {
+		const mainFocusObj = this.state.mainFocus;
+		mainFocusObj.value = newValue;
+		this.setState({mainFocus: mainFocusObj});
+	}
+
+	handleMainFocusSubmit(newShow) {
+		const mainFocusObj = this.state.mainFocus;
+		mainFocusObj.show = newShow;
+		mainFocusObj.value = newShow ? mainFocusObj.value : '';
+		this.setState({mainFocus: mainFocusObj});
+	}
+
+	handleMainFocusCheck(newChecked) {
+		const mainFocusObj = this.state.mainFocus;
+		mainFocusObj.checked = newChecked;
+		this.setState({mainFocus: mainFocusObj});
 	}
 
 	render() {
@@ -112,7 +129,13 @@ export class App extends React.Component {
 						onNameInputChange={this.handleNameInputChange}
 						onNameSubmit={this.handleNameSubmit}
 					/>
-					{/* <TodoPrompt /> */}
+					<Todo
+						name={this.state.name}
+						mainFocus={this.state.mainFocus}
+						onMainFocusInputChange={this.handleMainFocusInputChange}
+						onMainFocusSubmit={this.handleMainFocusSubmit}
+						onMainFocusCheck={this.handleMainFocusCheck}
+					/>
 				</div>
 			</div>
 		);
